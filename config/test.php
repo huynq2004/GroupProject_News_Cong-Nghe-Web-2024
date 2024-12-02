@@ -1,11 +1,9 @@
 <?php
-// Import class Database
+//Test connectDatabase
 require_once 'database.php';
 
 // Tạo đối tượng Database
 $db = new Database();
-
-// Thử kết nối
 $conn = $db->connect();
 
 if ($conn) {
