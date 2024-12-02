@@ -1,36 +1,37 @@
 <?php
+require_once 'database.php';
 
 class News {
-    //Các thuộc tính (thành phần) của tin tức
-    private $id;
-    private $title;
-    private $content;
-    private $image;
-    private $created_at;
-    private $category_id;
+    private $db;
 
-    //Hàm khởi tạo 1 bản tin với các thuộc tính
-    public function __construct($id, $title, $content, $image, $created_at, $category_id) {
-        $this->id = $id;
-        $this->title = $title;
-        $this->content = $content;
-        $this->image = $image;
-        $this->created_at = $created_at;
-        $this->category_id = $category_id;
+    public function __construct() {
+        $database = new Database();
+        $this->db = $database->connect();
     }
 
-    //Getter để lớp khác truy cập thông tin (do các thuộc tính bản tin có pvi truy xuất là private = không thể truy cập từ ngoài)
-    public function getId() { return $this->id; }
-    public function getTitle() { return $this->title; }
-    public function getContent() { return $this->content; }
-    public function getImage() { return $this->image; }
-    public function getCreatedAt() { return $this->created_at; }
-    public function getCategoryId() { return $this->category_id; }
+    // Lấy danh sách tin tức
+    public function getAllNews() {
+        $stmt = $this->db->prepare("
+            SELECT n.id, n.title, n.content, n.image, n.created_at, c.name as category_name
+            FROM news n
+            JOIN categories c ON n.category_id = c.id
+            ORDER BY n.created_at DESC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-    //Setter
-    public function setTitle($title) {  $this->title = $title; }
-    public function setContent($content) { $this->content = $content; }
-    public function setImage($image) { $this->image = $image; }
-    public function setCreated_at($created_at) { $this->created_at = $created_at; }
-    public function setCategoryId($category_id) { $this->category_id = $category_id; }
+    // Lấy chi tiết tin tức theo ID
+    public function getNewsById($id) {
+        $stmt = $this->db->prepare("
+            SELECT n.id, n.title, n.content, n.image, n.created_at, c.name as category_name
+            FROM news n
+            JOIN categories c ON n.category_id = c.id
+            WHERE n.id = :id
+        ");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
+?>
