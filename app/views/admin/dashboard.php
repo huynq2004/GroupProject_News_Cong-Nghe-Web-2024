@@ -28,7 +28,7 @@
                 ?>
                     <tr>
                         <td scope="row">
-                            <img src="<?php $news->getImage(); ?>" class="img-thumbnail" alt="Ảnh thumbnail tin tức" style="width: 100px; height: auto;">
+                            <img src="<?= DOMAIN.'public/images/'.$news->getImage()?>" class="img-thumbnail" alt="Ảnh thumbnail tin tức" style="width: 100px; height: auto;">
                         </td>
                         <td>
                             <h5><?= $news->getTitle() ?></h5>

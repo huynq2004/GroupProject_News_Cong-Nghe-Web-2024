@@ -2,24 +2,22 @@
 require_once APP_ROOT .'/app/models/News.php';
 
 class NewsService{
-    public function getAllNews(){
+    public function getAllNews()
+    {
         $newsList = [];
-        try{
-            //Kết nối đến CSDL
-            $conn = new PDO('mysql:host=localhost;dbname=tintuc', 'root', '' );
+        //Kết nối đến CSDL
+        $dbConnection = new DBConnection();
+        $conn = $dbConnection->getConnection();
 
+        if ($conn != null) {
             //Truy vấn
             $sql = "SELECT * FROM news ORDER BY created_at DESC";
             $stmt = $conn->query($sql);
 
             //Xử lý kết quả trả về
-            while($row = $stmt->fetch()){
+            while ($row = $stmt->fetch()) {
                 $newsList[] = new News($row['id'], $row['title'], $row['content'], $row['image'], $row['created_at'], $row['category_id']);
             }
-            return $newsList;
-
-        } catch( PDOException $e ) {
-            echo $e->getMessage();
             return $newsList;
         }
     }
