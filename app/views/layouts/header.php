@@ -58,11 +58,11 @@
                 </div>
 
                 <div class="ms-3">
-                    <img src="/PHP/BTTH/BTTH02/GroupProject_News_Cong-Nghe-Web-2024/views/layouts/logo2.webp" alt="Thế Giới 24 Logo" height="60">
+                    <img src="<?=DOMAIN.'public/images/logo2.webp'?>" alt="Thế Giới 24 Logo" height="60">
                 </div>
             </div>
             <a href="#" class="nav-link mx-2" style="color:gray">ĐĂNG NHẬP
-                <img src="/PHP/BTTH/BTTH02/GroupProject_News_Cong-Nghe-Web-2024/views/layouts/icon1.png" alt="icon login" height="18">
+                <img src="<?=DOMAIN.'public/images/icon1.png'?>" alt="icon login" height="18">
             </a>
         </div>
     </header>
