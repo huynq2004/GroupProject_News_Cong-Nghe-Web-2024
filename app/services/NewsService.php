@@ -28,6 +28,17 @@ class NewsService{
     }
 
     public function addNews($news){}
+      // Lấy tất cả bài viết
+      public function getAllNews() {
+        $newsModel = new News();
+        return $newsModel->getAll();
+    }
+
+    // Lấy chi tiết bài viết theo ID
+    public function getNewsById($id) {
+        $newsModel = new News();
+        return $newsModel->getById($id);
+    }
 }
     
         
