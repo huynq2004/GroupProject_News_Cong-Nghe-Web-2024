@@ -1,12 +1,13 @@
+<?php
+require_once('../../config/config.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
-
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="<?=DOMAIN . 'public/css/bootstrap.min.css';?>">
     <style>
         .login-container {
             height: 100vh;
@@ -22,12 +23,11 @@
             width: 800px;
         }
         .login-image {
-            flex: 1;
-            background-image: url('../../../public/images/logoLogin.png');
-
-            background-size: cover;
-            background-position: center;
-        }
+        flex: 1;
+        background-image: url('<?php echo DOMAIN; ?>public/images/Login_Logo.png');
+        background-size: cover;
+        background-position: center;
+    }
         .login-form {
             flex: 1;
             padding: 40px;
@@ -48,8 +48,10 @@
             border-radius: 5px; 
             font-weight: bold;
             border: none;
+            margin-top: 15px;
         }
         .login-form .btn-login:hover {
+           
             background-color: #e0a800; 
         }
     </style>
