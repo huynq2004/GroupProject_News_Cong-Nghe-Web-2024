@@ -24,7 +24,7 @@
                             <p><?= $news->getContent() ?></p>
                         </td>
                         <td style="vertical-align: middle;">
-                            <a href="<?= DOMAIN.'app/views/admin/news/edit.php?id='.$news->getId()?>"><i class="bi-pencil-square" style="font-size: 30px;"></i></a>
+                            <a href="?controller=News&action=edit&id=<?= $news->getId();  ?>" title="Sửa"><i class="bi-pencil-square" style="font-size: 30px;"></i></a>
                         </td>
                         <td style="vertical-align: middle;">
                             <form action="<?= DOMAIN.'app/views/admin/news/delete.php' ?>" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa tin này?')">
