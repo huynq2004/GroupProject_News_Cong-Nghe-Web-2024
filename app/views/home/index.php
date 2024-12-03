@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 // Kết nối cơ sở dữ liệu
 $host = "localhost";
@@ -21,10 +22,13 @@ $result = $conn->query($sql);
 
 <?php include('../layouts/header.php'); ?> <!-- Include header -->
 
+=======
+>>>>>>> 2008621f6b59d55f89d75954d68782bfb4b03d33
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Tin Tức</title>
     <style>
@@ -121,5 +125,28 @@ $conn->close();
 
 <?php include('../layouts/footer.php'); ?> <!-- Include footer -->
 
+=======
+    <title>Danh sách tin tức</title>
+</head>
+<body>
+    <h1>Danh sách tin tức</h1>
+    <?php if (!empty($newsList)): ?>
+        <ul>
+            <?php foreach ($newsList as $news): ?>
+                <li>
+                    <h2>
+                        <a href="index.php?controller=news&action=detail&id=<?= $news['id'] ?>">
+                            <?= htmlspecialchars($news['title']) ?>
+                        </a>
+                    </h2>
+                    <p><?= htmlspecialchars(substr($news['content'], 0, 100)) ?>...</p>
+                    <p><strong>Chuyên mục:</strong> <?= htmlspecialchars($news['category_name']) ?></p>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p>Không có tin tức nào!</p>
+    <?php endif; ?>
+>>>>>>> 2008621f6b59d55f89d75954d68782bfb4b03d33
 </body>
 </html>

@@ -28,6 +28,7 @@ class NewsService{
     }
 
     public function addNews($news){}
+<<<<<<< HEAD
       // Lấy tất cả bài viết
       public function getAllNews() {
         $newsModel = new News();
@@ -39,6 +40,8 @@ class NewsService{
         $newsModel = new News();
         return $newsModel->getById($id);
     }
+=======
+>>>>>>> 2008621f6b59d55f89d75954d68782bfb4b03d33
 }
     
         

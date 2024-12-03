@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 // Kết nối cơ sở dữ liệu
 $host = "localhost";
@@ -46,10 +47,13 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 $conn->close();
 ?>
 
+=======
+>>>>>>> 2008621f6b59d55f89d75954d68782bfb4b03d33
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?> - Chi tiết bài viết</title>
     <style>
@@ -112,5 +116,18 @@ $conn->close();
     </div>
 </div>
 
+=======
+    <title>Chi tiết tin tức</title>
+</head>
+<body>
+    <h1><?= htmlspecialchars($newsItem['title']) ?></h1>
+    <p><strong>Chuyên mục:</strong> <?= htmlspecialchars($newsItem['category_name']) ?></p>
+    <p><?= htmlspecialchars($newsItem['content']) ?></p>
+    <?php if (!empty($newsItem['image'])): ?>
+        <img src="uploads/<?= htmlspecialchars($newsItem['image']) ?>" alt="<?= htmlspecialchars($newsItem['title']) ?>">
+    <?php endif; ?>
+    <p>Ngày đăng: <?= htmlspecialchars($newsItem['created_at']) ?></p>
+    <a href="index.php">Quay lại danh sách</a>
+>>>>>>> 2008621f6b59d55f89d75954d68782bfb4b03d33
 </body>
 </html>
