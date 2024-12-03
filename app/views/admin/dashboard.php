@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý tin tức</title>
-    <link rel="stylesheet" href="<?= DOMAIN . 'public/css/bootstrap.min.css'; ?>">
-    <link rel="stylesheet" href="<?= DOMAIN . 'public/css/bootstrap-icons.min.css'; ?>">
-</head>
-
-<body>
+<?php include APP_ROOT . '/app/views/layouts/header.php'; ?>
     <div class="container mt-4">
         <table class="table">
             <thead class="table-dark">
@@ -52,6 +41,4 @@
             </tbody>
         </table>
     </div>
-</body>
-
-</html>
+<?php include APP_ROOT . '/app/views/layouts/footer.php'; ?>
