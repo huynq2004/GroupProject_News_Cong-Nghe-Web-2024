@@ -9,7 +9,7 @@ class News {
     private $created_at;
     private $category_id;
 
-    //Hàm khởi tạo 1 bản tin với các thuộc tính
+    //constructer 1 bản tin với các thuộc tính
     public function __construct($id, $title, $content, $image, $created_at, $category_id) {
         $this->id = $id;
         $this->title = $title;
