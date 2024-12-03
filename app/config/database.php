@@ -11,12 +11,16 @@ class DBConnection {
         $this->user = DB_USER;
         $this->pass = DB_PASS;
         $this->dbname= DB_NAME;
+        
         try{
-            $conn = new PDO("mysql:host={$this->host};dbname={$this->dbname}", $this->user, $this->pass);
-
+            $this->conn = new PDO("mysql:host={$this->host};dbname={$this->dbname}", $this->user, $this->pass);
         }catch (PDOException $e){
             $this-> conn = null;
         }
+    }
+    
+    public function getConnection(){
+        return $this->conn;
     }
 }
 ?>
