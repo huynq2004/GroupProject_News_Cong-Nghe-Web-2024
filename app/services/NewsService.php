@@ -28,6 +28,33 @@ class NewsService{
     }
 
     public function addNews($news){}
+
+    //Thêm phương thức searchNews để tìm kiếm tin tức theo tiêu đề hoặc nội dung
+    public function searchNews($query) {
+        $results = [];
+        try {
+            // Kết nối đến CSDL
+            $conn = new PDO('mysql:host=localhost;dbname=tintuc', 'root', '');
+    
+            // Truy vấn tìm kiếm
+            $sql = "SELECT * FROM news WHERE title LIKE :query OR content LIKE :query";
+            $stmt = $conn->prepare($sql);
+            $searchTerm = "%" . $query . "%";
+            $stmt->bindParam(':query', $searchTerm);
+            $stmt->execute();
+    
+            // Xử lý kết quả trả về
+            while ($row = $stmt->fetch()) {
+                $results[] = new News($row['id'], $row['title'], $row['content'], $row['image'], $row['created_at'], $row['category_id']);
+            }
+            return $results;
+    
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return $results;
+        }
+    }
+
 }
     
         
