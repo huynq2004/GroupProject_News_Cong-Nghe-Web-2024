@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý tin tức</title>
-    <link rel="stylesheet" href="<?= DOMAIN . 'public/css/bootstrap.min.css'; ?>">
-    <link rel="stylesheet" href="<?= DOMAIN . 'public/css/bootstrap-icons.min.css'; ?>">
-</head>
-
-<body>
+<?php include APP_ROOT . '/app/views/layouts/header.php'; ?>
     <div class="container mt-4">
         <table class="table">
             <thead class="table-dark">
@@ -27,21 +16,21 @@
                 foreach ($newsList as $news) {
                 ?>
                     <tr>
-                        <td scope="row">
-                            <img src="<?php $news->getImage(); ?>" class="img-thumbnail" alt="Ảnh thumbnail tin tức" style="width: 100px; height: auto;">
+                        <td scope="row" style="width: 166px">
+                            <img src="<?= DOMAIN.'public/images/'.$news->getImage()?>" class="img-thumbnail" alt="Ảnh thumbnail tin tức" style="width: 150px; height: 100px;">
                         </td>
                         <td>
                             <h5><?= $news->getTitle() ?></h5>
                             <p><?= $news->getContent() ?></p>
                         </td>
-                        <td>
-                            <a href="<?= DOMAIN.'app/views/admin/news/edit.php?id='.$news->getId()?>"><i class="bi-pencil-square"></i></a>
+                        <td style="vertical-align: middle;">
+                            <a href="<?= DOMAIN.'app/views/admin/news/edit.php?id='.$news->getId()?>"><i class="bi-pencil-square" style="font-size: 30px;"></i></a>
                         </td>
-                        <td>
+                        <td style="vertical-align: middle;">
                             <form action="<?= DOMAIN.'app/views/admin/news/delete.php' ?>" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa tin này?')">
                                 <input type="hidden" name="id" value="<?= $news->getId() ?>">
                                 <button type="submit" class="btn btn-link p-0 m-0 text-danger" style="border: none; background: none;">
-                                    <i class="bi bi-trash"></i>
+                                    <i class="bi bi-trash" style="font-size: 30px;"></i>
                                 </button>
                             </form>
                         </td>
@@ -49,11 +38,7 @@
                 <?php
                 }
                 ?>
-
-
             </tbody>
         </table>
     </div>
-</body>
-
-</html>
+<?php include APP_ROOT . '/app/views/layouts/footer.php'; ?>

@@ -61,7 +61,7 @@
                     <img src="<?=DOMAIN.'public/images/logo2.webp'?>" alt="Thế Giới 24 Logo" height="60">
                 </div>
             </div>
-            <a href="#" class="nav-link mx-2" style="color:gray">ĐĂNG NHẬP
+            <a href="<?= DOMAIN.'app/views/admin/login.php'?>" class="nav-link mx-2" style="color:gray">ĐĂNG NHẬP
                 <img src="<?=DOMAIN.'public/images/icon1.png'?>" alt="icon login" height="18">
             </a>
         </div>
@@ -100,5 +100,4 @@
         </div>
       </div>
     </nav>
-</body>
-</html>
+
