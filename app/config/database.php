@@ -11,9 +11,9 @@ class DBConnection {
         $this->user = DB_USER;
         $this->pass = DB_PASS;
         $this->dbname= DB_NAME;
+        
         try{
             $this->conn = new PDO("mysql:host={$this->host};dbname={$this->dbname}", $this->user, $this->pass);
-
         }catch (PDOException $e){
             $this-> conn = null;
         }
