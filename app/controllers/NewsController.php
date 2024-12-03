@@ -9,5 +9,17 @@ class NewsController {
         //Render dữ liệu lấy ra vào dashboard
         include APP_ROOT.'/app/views/admin/dashboard.php';
     }
+
+    //Thêm phương thức search để xử lý tìm kiếm
+    public function search() {
+        $query = $_GET['query'];
+        
+        // Gọi dịch vụ để tìm kiếm tin tức
+        $newsService = new NewsService();
+        $results = $newsService->searchNews($query);
+        
+        // Chuyển kết quả tới view
+        include APP_ROOT.'/app/views/news/search_results.php';
+    }
         
 }
