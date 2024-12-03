@@ -1,22 +1,22 @@
 <?php
-class Database {
-    private $host = 'localhost'; // Địa chỉ máy chủ
-    private $db_name = 'news_website'; // Tên cơ sở dữ liệu
-    private $username = 'root'; // Tên người dùng MySQL
-    private $password = ''; // Mật khẩu MySQL
+class DBConnection {
+    private $host;
+    private $user;
+    private $pass;
+    private $dbname;
     private $conn;
+    public function __construct(){
 
-    public function connect() {
-        $this->conn = null;
+        $this->host = DB_HOST;
+        $this->user = DB_USER;
+        $this->pass = DB_PASS;
+        $this->dbname= DB_NAME;
+        try{
+            $conn = new PDO("mysql:host={$this->host};dbname={$this->dbname}", $this->user, $this->pass);
 
-        try {
-            $this->conn = new PDO("mysql:host={$this->host};dbname={$this->db_name};charset=utf8mb4", $this->username, $this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            echo "Connection error: " . $e->getMessage();
+        }catch (PDOException $e){
+            $this-> conn = null;
         }
-
-        return $this->conn;
     }
 }
 ?>
