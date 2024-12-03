@@ -25,7 +25,7 @@ CREATE TABLE news (
     image VARCHAR(255),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     category_id INT NOT NULL,
-    FOREIGN KEY (category_id) REFERENCES categories(id)
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 );
 --Them admin
 
