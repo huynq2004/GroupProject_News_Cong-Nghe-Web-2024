@@ -37,4 +37,12 @@ class AdminController
     {
         include APP_ROOT . '/app/views/admin/login.php';
     }
+
+    public function logout()
+    {
+        session_start();
+        session_destroy();
+        header("Location: ?controller=Home&action=index");
+        exit();
+    }
 }
