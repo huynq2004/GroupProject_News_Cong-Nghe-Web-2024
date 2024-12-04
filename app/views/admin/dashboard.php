@@ -4,7 +4,7 @@
             <thead class="table-dark">
                 <tr>
                     <th scope="col">
-                        <a href="<?= DOMAIN . '/app/views/admin/news/add.php'; ?>" class="btn btn-success">Thêm bản tin</a>
+                        <a href="?controller=News&action=showAdd" class="btn btn-success">Thêm bản tin</a>
                     </th>
                     <th scope="col"></th>
                     <th scope="col">Sửa</th>
