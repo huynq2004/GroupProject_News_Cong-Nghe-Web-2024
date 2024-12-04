@@ -1,15 +1,29 @@
 <?php
-require_once('../app/config/config.php');
-require_once APP_ROOT . '/app/config/database.php';
-//Dùng để test controller
-require_once APP_ROOT . '/app/controllers/NewsController.php';
+require_once '../app/config/config.php';
+require '../app/config/database.php';
 
-$controller = new NewsController();
+// Lấy thông tin về controller và action từ URL
+$controller = isset($_GET['controller']) ? ucfirst($_GET['controller']) : 'Home';
 
-// Kiểm tra nếu có yêu cầu tìm kiếm
-if (isset($_GET['q'])) {
-    $controller->searchAction(); // Xử lý tìm kiếm
+$action = isset($_GET['action']) ? $_GET['action'] : 'index';
+
+// Tạo đường dẫn đến file controller dựa trên thông tin từ URL
+$controllerPath = "../app/controllers/{$controller}Controller.php";
+
+// Kiểm tra và include controller
+if (file_exists($controllerPath)) {
+    require $controllerPath;
+    $controllerClass = $controller . 'Controller';
+    $controllerObject = new $controllerClass();
+
+    // Gọi action
+    if (method_exists($controllerObject, $action)) {
+        $controllerObject->$action();
+    } else {
+        // Action không tồn tại
+        echo "404 Not Found: The action does not exist.";
+    }
 } else {
-    $controller->index(); // Hiển thị trang chủ nếu không có tìm kiếm
+    // Controller không tồn tại
+    echo "404 Not Found: The controller does not exist.";
 }
-?>

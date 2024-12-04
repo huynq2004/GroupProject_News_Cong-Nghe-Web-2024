@@ -10,28 +10,105 @@ class NewsController {
         include APP_ROOT.'/app/views/admin/dashboard.php';
     }
 
-    public function searchAction() {
-        // Kiểm tra xem có từ khóa tìm kiếm không
-        $keyword = isset($_GET['q']) ? $_GET['q'] : '';
 
-        if (!empty($keyword)) {
-            // Tạo kết nối đến cơ sở dữ liệu
-            $db = new DBConnection();
-            $conn = $db->getConnection();
+    public function add() {
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $title = $_POST['title'] ?? '';
+        $content = $_POST['content'] ?? '';
+        $image = $_FILES['image'] ?? null;
+        $category_id = $_POST['category_id'] ?? null;
 
-            // Truy vấn tìm kiếm trong bảng 'news' với từ khóa
-            $sql = "SELECT * FROM news WHERE title LIKE :keyword OR content LIKE :keyword";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindValue(':keyword', '%' . $keyword . '%');
-            $stmt->execute();
+        $imageName = null;
+        if ($image && $image['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = APP_ROOT . '/public/images/';
+            $imageName = basename($image['name']);
+            $uploadFile = $uploadDir . $imageName;
 
-            // Lấy danh sách tin tức tìm thấy
-            $newsList = $stmt->fetchAll(PDO::FETCH_OBJ);
+            if (!move_uploaded_file($image['tmp_name'], $uploadFile)) {
+                echo "Không thể upload hình ảnh!";
+                exit();
+            }
+        }
 
-            // Gọi view để hiển thị kết quả
-            require_once APP_ROOT . '/app/views/search_results.php';
+        $newsService = new NewsService();
+        $newsService->addNews($title, $content, $imageName, $category_id);
+
+        header('Location: ?controller=News&action=index');
+        exit();
+    }
+
+    include APP_ROOT . '/app/views/admin/news/add.php';
+}
+
+    public function showAdd()
+    {
+        include APP_ROOT . '/app/views/admin/news/add.php';
+    }
+
+    public function edit() {
+        $id = isset($_GET['id']) ? intval($_GET['id']) : null;
+
+        if ($id) {
+            $newsService = new NewsService();
+            $news = $newsService->getNewsById($id);
+
+            if ($news) {
+                // Chuyển đến view edit.php cùng với dữ liệu bài viết
+                include APP_ROOT . '/app/views/admin/news/edit.php';
+            } else {
+                echo "Bài viết không tồn tại.";
+            }
         } else {
-            echo 'Vui lòng nhập từ khóa tìm kiếm.';
+            echo "ID không hợp lệ.";
         }
     }
+
+    public function update() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+            $title = $_POST['title'];
+            $content = $_POST['content'];
+            $image = $_FILES['image'];
+            $category_id = $_POST['category_id'];
+
+            $newsService = new NewsService();
+
+            // Kiểm tra và upload hình ảnh mới nếu có
+            if (!empty($image['name'])) {
+                $imageName = time() . '_' . $image['name'];
+                move_uploaded_file($image['tmp_name'], APP_ROOT . '/public/images/' . $imageName);
+            } else {
+                $news = $newsService->getNewsById($id);
+                $imageName = $news->getImage();
+            }
+
+            $success = $newsService->updateNews($id, $title, $content, $imageName, $category_id);
+
+            if ($success) {
+                header("Location: " . DOMAIN . "public/index.php?controller=News&action=index");
+                exit();
+            } else {
+                echo "Cập nhật không thành công.";
+                exit();
+            }
+        }
+    }
+
+    public function delete() {
+        $id = $_POST['id'] ?? null;
+
+    if ($id) {
+        $newsService = new NewsService();
+        $newsService->delete($id);
+
+        // Chuyển hướng về dashboard sau khi xóa
+        header('Location: ?controller=News&action=index');
+        exit();
+    } else {
+        echo "ID không hợp lệ!";
+    }
+
+    }
+
+
 }
