@@ -89,8 +89,8 @@
                 <li><a class="dropdown-item" href="#">Kinh tế</a></li>
               </ul>
             </li>
-            <form class="d-flex" role="search" action="<?= DOMAIN . 'index.php' ?>" method="GET" style="width: 350px">
-              <input class="form-control me-2" type="search" name="q" placeholder="Tìm kiếm" aria-label="Search" style="font-size: 20px; padding: 5px;" required>
+            <form class="d-flex" role="search" action="?controller=News&action=search" method="POST" style="width: 350px">
+              <input class="form-control me-2" type="search" name="text" placeholder="Tìm kiếm" aria-label="Search" style="font-size: 20px; padding: 5px;" required>
               <button class="btn btn-outline-secondary" type="submit" style="font-size: 15px; padding: 5px 10px 5px 8px; width:150px">TÌM KIẾM</button>
             </form>
             <li class="nav-item">

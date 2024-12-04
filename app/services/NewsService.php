@@ -110,4 +110,29 @@ class NewsService
             echo 'Không thể kết nối cơ sở dữ liệu!';
         }
     }
+
+    //Thêm phương thức searchNews để tìm kiếm tin tức theo tiêu đề hoặc nội dung
+    public function searchNews($query) {
+        $results = [];
+        try {
+            $dbConnection = new DBConnection();
+            $conn = $dbConnection->getConnection();
+
+            $sql = "SELECT * FROM news WHERE title LIKE :query";
+            $stmt = $conn->prepare($sql);
+            $searchTerm = "%" . $query . "%";
+            $stmt->bindParam(':query', $searchTerm);
+            $stmt->execute();
+
+            // Xử lý kết quả trả về
+            while ($row = $stmt->fetch()) {
+                $results[] = new News($row['id'], $row['title'], $row['content'], $row['image'], $row['created_at'], $row['category_id']);
+            }
+            return $results;
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return $results;
+        }
+    }
 }

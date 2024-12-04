@@ -10,6 +10,17 @@ class NewsController {
         include APP_ROOT.'/app/views/admin/dashboard.php';
     }
 
+    public function search() {
+        $query = $_POST['text'];
+
+        // Gọi dịch vụ để tìm kiếm tin tức
+        $newsService = new NewsService();
+        $newsList = $newsService->searchNews($query);
+
+        // Chuyển kết quả tới view
+        include APP_ROOT.'/app/views/news/search_results.php';
+    }
+
 
     public function add() {
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {

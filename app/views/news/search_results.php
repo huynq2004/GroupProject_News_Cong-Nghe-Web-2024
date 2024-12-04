@@ -8,9 +8,10 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h2>Kết quả tìm kiếm cho: "<?= htmlspecialchars($_GET['q']) ?>"</h2>
+        <h2>Kết quả tìm kiếm cho: "<?= htmlspecialchars($_POST['text']) ?>"</h2>
 
         <?php if (!empty($newsList)): ?>
+
             <ul class="list-group">
                 <?php foreach ($newsList as $news): ?>
                     <li class="list-group-item">
