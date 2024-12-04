@@ -15,7 +15,7 @@
                         </td>
                         <td style="vertical-align: middle;">
                             <a href="?controller=Home&action=detail&id=<?= $news->getId();  ?>" title="Đọc Thêm">Đọc Thêm</a>
-                        
+
                     </tr>
                 <?php
                 }

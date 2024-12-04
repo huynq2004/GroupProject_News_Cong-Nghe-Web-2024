@@ -123,4 +123,8 @@ require_once APP_ROOT . '/app/config/config.php';
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 11631c2cd7a3812f199f1bd1cbaeb5c84bfdd934

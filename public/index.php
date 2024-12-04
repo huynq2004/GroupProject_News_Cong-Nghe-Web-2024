@@ -15,7 +15,7 @@ if (file_exists($controllerPath)) {
     require $controllerPath;
     $controllerClass = $controller . 'Controller';
     $controllerObject = new $controllerClass();
-    
+
     // Gọi action
     if (method_exists($controllerObject, $action)) {
         $controllerObject->$action();
