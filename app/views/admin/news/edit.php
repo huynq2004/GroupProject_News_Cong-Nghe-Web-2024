@@ -17,6 +17,15 @@
             <input type="file" name="image" class="form-control" id="image">
             <img src="<?= DOMAIN . 'public/images/' . $news->getImage(); ?>" alt="Current Image" style="width: 150px; height: 100px;">
         </div>
+        <div class="mb-3">
+            <label for="category_id" class="form-label">Danh mục</label>
+            <select name="category_id" class="form-select" id="category_id" required>
+                <option value="1" <?= $news->getCategoryId() === 1 ? 'selected' : ''; ?>>Thời sự</option>
+                <option value="2" <?= $news->getCategoryId() === 2 ? 'selected' : ''; ?>>Thể thao</option>
+                <option value="3" <?= $news->getCategoryId() === 3 ? 'selected' : ''; ?>>Giải trí</option>
+                <option value="4" <?= $news->getCategoryId() === 4 ? 'selected' : ''; ?>>Kinh tế</option>
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
         <a href="?controller=News&action=index" class="btn btn-secondary">Hủy</a>
     </form>
