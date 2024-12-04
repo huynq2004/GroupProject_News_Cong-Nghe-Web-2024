@@ -2,7 +2,7 @@
 
 <div class="container mt-4">
     <h2>Chỉnh sửa tin tức</h2>
-    <form action="<?= DOMAIN . '/news/update' ?>" method="POST" enctype="multipart/form-data">
+    <form action="?controller=News&action=update" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $news->getId(); ?>">
         <div class="mb-3">
             <label for="title" class="form-label">Tiêu đề</label>
