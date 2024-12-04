@@ -1,31 +1,27 @@
 <?php
-require_once APP_ROOT.'/app/services/NewsService.php';
+require_once 'models/News.php';
 
 class HomeController {
-    public function index() {
-        //Gọi dữ liệu từ NewsService
-        $newsService = new NewsService();
-        $newsList = $newsService->getAllNews();
+    private $newsModel;
 
-        //Render dữ liệu lấy ra vào dashboard
-        include APP_ROOT.'/app/views/home/index.php';
+    public function __construct() {
+        $this->newsModel = new News();
     }
 
-    public function detail() {
-        $id = isset($_GET['id']) ? intval($_GET['id']) : null;
-
-        if ($id) {
-            $newsService = new NewsService();
-            $news = $newsService->getNewsById($id);
-    
-            if ($news) {
-                include APP_ROOT . '/app/views/news/detail.php';
-            } else {
-                echo "Bài viết không tồn tại.";
-            }
-        } else {
-            echo "ID không hợp lệ.";
+    public function index() {
+        // Lấy danh sách tin tức
+        $newsList = $this->newsModel->getAllNews();
+        // Gọi view danh sách tin tức
+        require 'views/home/index.php';
+    }
+    public function detail($id) {
+        // Lấy chi tiết tin tức theo ID
+        $newsItem = $this->newsModel->getNewsById($id);
+        if (!$newsItem) {
+            die("Tin tức không tồn tại.");
         }
+        // Gọi view chi tiết tin tức
+        require 'views/news/detail.php';
     }
 }
-
+?>
