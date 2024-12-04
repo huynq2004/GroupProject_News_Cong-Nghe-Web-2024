@@ -12,6 +12,16 @@ class NewsController
         include APP_ROOT . '/app/views/admin/dashboard.php';
     }
 
+    //tìm kiếm tin tức
+    public function search() {
+        $query = $_POST['text'];
+
+        // Gọi dịch vụ để tìm kiếm tin tức
+        $newsService = new NewsService();
+        $newsList = $newsService->searchNews($query);
+
+        include APP_ROOT.'/app/views/news/search_results.php';
+    }
 
     public function add()
     {

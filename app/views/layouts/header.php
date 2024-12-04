@@ -77,7 +77,7 @@ session_start();
         <a href="?controller=Admin&action=logout" class="nav-link mx-2" style="color:gray">ĐĂNG XUẤT
         </a>
       <?php else: ?>
-        <a href="?controller=Admin&action=showLogin" class="nav-link mx-2" style="color:gray">ĐĂNG NhẬP</a>
+        <a href="?controller=Admin&action=showLogin" class="nav-link mx-2" style="color:gray">ĐĂNG NHẬP</a>
       <?php endif; ?>
     </div>
   </header>
@@ -91,31 +91,27 @@ session_start();
       <div class="collapse navbar-collapse" id="navbarsExample09">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-around w-100">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="?controller=Home&action=index">TRANG CHỦ</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              THỂ LOẠI
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Đời sống</a></li>
-              <li><a class="dropdown-item" href="#">Giáo dục</a></li>
-              <li><a class="dropdown-item" href="#">Chính trị</a></li>
-              <li><a class="dropdown-item" href="#">Kinh tế</a></li>
-            </ul>
-          </li>
-          <form class="d-flex" role="search" style="width: 350px">
-            <input class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" style="font-size: 20px; padding: 5px;">
-            <button class="btn btn-outline-secondary" type="submit" style="font-size: 15px; padding: 5px 10px 5px 8px; width:150px">TÌM KIẾM</button>
-          </form>
-          <li class="nav-item">
-            <a class="nav-link active" aria-disabled="false" href="#">LIÊN HỆ</a>
-          </li>
-        </ul>
+          <a class="nav-link active" aria-current="page" href="?controller=Home&action=index">TRANG CHỦ</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                THỂ LOẠI
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Đời sống</a></li>
+                <li><a class="dropdown-item" href="#">Giáo dục</a></li>
+                <li><a class="dropdown-item" href="#">Chính trị</a></li>
+                <li><a class="dropdown-item" href="#">Kinh tế</a></li>
+              </ul>
+            </li>
+            <form class="d-flex" role="search" action="?controller=News&action=search" method="POST" style="width: 350px">
+              <input class="form-control me-2" type="search" name="text" placeholder="Tìm kiếm" aria-label="Search" style="font-size: 20px; padding: 5px;" required>
+              <button class="btn btn-outline-secondary" type="submit" style="font-size: 15px; padding: 5px 10px 5px 8px; width:150px">TÌM KIẾM</button>
+            </form>
+            <li class="nav-item">
+              <a class="nav-link active" aria-disabled="false" href="#">LIÊN HỆ</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-
-</body>
-
-</html>
+    </nav>
