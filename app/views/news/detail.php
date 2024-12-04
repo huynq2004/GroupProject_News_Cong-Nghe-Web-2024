@@ -15,4 +15,4 @@
     <hr>
 </div>
 
-<?php include APP_ROOT . '/app/views/layouts/footer.php'; ?>
+<?php include APP_ROOT . '/app/views/layouts/footer.php'; ?> 

@@ -9,7 +9,7 @@ class HomeController {
 
         //Render dữ liệu lấy ra vào dashboard
         include APP_ROOT.'/app/views/home/index.php';
-    }
+    } 
 
     public function detail() {
         $id = isset($_GET['id']) ? intval($_GET['id']) : null;
