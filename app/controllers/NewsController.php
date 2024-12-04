@@ -1,57 +1,61 @@
-<?php 
-require_once APP_ROOT.'/app/services/NewsService.php';
-class NewsController {
-    public function index() {
+<?php
+require_once APP_ROOT . '/app/services/NewsService.php';
+class NewsController
+{
+    public function index()
+    {
         //Gọi dữ liệu từ NewsService
         $newsService = new NewsService();
         $newsList = $newsService->getAllNews();
 
         //Render dữ liệu lấy ra vào dashboard
-        include APP_ROOT.'/app/views/admin/dashboard.php';
+        include APP_ROOT . '/app/views/admin/dashboard.php';
     }
 
 
-    public function add() {
-      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $title = $_POST['title'] ?? '';
-        $content = $_POST['content'] ?? '';
-        $image = $_FILES['image'] ?? null;
-        $category_id = $_POST['category_id'] ?? null;
+    public function add()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $title = $_POST['title'] ?? '';
+            $content = $_POST['content'] ?? '';
+            $image = $_FILES['image'] ?? null;
+            $category_id = $_POST['category_id'] ?? null;
 
-        $imageName = null;
-        if ($image && $image['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = APP_ROOT . '/public/images/';
-            $imageName = basename($image['name']);
-            $uploadFile = $uploadDir . $imageName;
+            $imageName = null;
+            if ($image && $image['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = APP_ROOT . '/public/images/';
+                $imageName = basename($image['name']);
+                $uploadFile = $uploadDir . $imageName;
 
-            if (!move_uploaded_file($image['tmp_name'], $uploadFile)) {
-                echo "Không thể upload hình ảnh!";
-                exit();
+                if (!move_uploaded_file($image['tmp_name'], $uploadFile)) {
+                    echo "Không thể upload hình ảnh!";
+                    exit();
+                }
             }
+
+            $newsService = new NewsService();
+            $newsService->addNews($title, $content, $imageName, $category_id);
+
+            header('Location: ?controller=News&action=index');
+            exit();
         }
 
-        $newsService = new NewsService();
-        $newsService->addNews($title, $content, $imageName, $category_id);
-
-        header('Location: ?controller=News&action=index');
-        exit();
+        include APP_ROOT . '/app/views/admin/news/add.php';
     }
 
-    include APP_ROOT . '/app/views/admin/news/add.php';
-}
-
-    public function showAdd() 
+    public function showAdd()
     {
         include APP_ROOT . '/app/views/admin/news/add.php';
     }
-    
-    public function edit() {
+
+    public function edit()
+    {
         $id = isset($_GET['id']) ? intval($_GET['id']) : null;
 
         if ($id) {
             $newsService = new NewsService();
             $news = $newsService->getNewsById($id);
-    
+
             if ($news) {
                 // Chuyển đến view edit.php cùng với dữ liệu bài viết
                 include APP_ROOT . '/app/views/admin/news/edit.php';
@@ -62,17 +66,18 @@ class NewsController {
             echo "ID không hợp lệ.";
         }
     }
-    
-    public function update() {
+
+    public function update()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
             $title = $_POST['title'];
             $content = $_POST['content'];
             $image = $_FILES['image'];
             $category_id = $_POST['category_id'];
-    
+
             $newsService = new NewsService();
-    
+
             // Kiểm tra và upload hình ảnh mới nếu có
             if (!empty($image['name'])) {
                 $imageName = time() . '_' . $image['name'];
@@ -81,9 +86,9 @@ class NewsController {
                 $news = $newsService->getNewsById($id);
                 $imageName = $news->getImage();
             }
-    
+
             $success = $newsService->updateNews($id, $title, $content, $imageName, $category_id);
-    
+
             if ($success) {
                 header("Location: " . DOMAIN . "public/index.php?controller=News&action=index");
                 exit();
@@ -94,21 +99,19 @@ class NewsController {
         }
     }
 
-    public function delete() {
+    public function delete()
+    {
         $id = $_POST['id'] ?? null;
 
-    if ($id) {
-        $newsService = new NewsService();
-        $newsService->delete($id);
+        if ($id) {
+            $newsService = new NewsService();
+            $newsService->delete($id);
 
-        // Chuyển hướng về dashboard sau khi xóa
-        header('Location: ?controller=News&action=index');
-        exit();
-    } else {
-        echo "ID không hợp lệ!";
+            // Chuyển hướng về dashboard sau khi xóa
+            header('Location: ?controller=News&action=index');
+            exit();
+        } else {
+            echo "ID không hợp lệ!";
+        }
     }
-
-    }
-    
-
 }
