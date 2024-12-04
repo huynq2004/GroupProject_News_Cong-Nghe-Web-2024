@@ -9,7 +9,7 @@ class HomeController {
 
         //Render dữ liệu lấy ra vào dashboard
         include APP_ROOT.'/app/views/home/index.php';
-    } 
+    }
 
     public function detail() {
         $id = isset($_GET['id']) ? intval($_GET['id']) : null;
@@ -17,7 +17,7 @@ class HomeController {
         if ($id) {
             $newsService = new NewsService();
             $news = $newsService->getNewsById($id);
-    
+
             if ($news) {
                 // Chuyển đến view edit.php cùng với dữ liệu bài viết
                 include APP_ROOT . '/app/views/news/detail.php';
