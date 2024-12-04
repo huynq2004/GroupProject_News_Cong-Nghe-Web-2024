@@ -74,7 +74,7 @@ session_start();
         </div>
       </div>
       <?php if (isset($_SESSION['username'])): ?>
-        <a href="?controller=Home&action=index" class="nav-link mx-2" style="color:gray">ĐĂNG XUẤT
+        <a href="?controller=Admin&action=logout" class="nav-link mx-2" style="color:gray">ĐĂNG XUẤT
         </a>
       <?php else: ?>
         <a href="?controller=Admin&action=showLogin" class="nav-link mx-2" style="color:gray">ĐĂNG NhẬP</a>
