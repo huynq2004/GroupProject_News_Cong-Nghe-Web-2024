@@ -10,23 +10,13 @@ class NewsController {
         include APP_ROOT.'/app/views/admin/dashboard.php';
     }
 
-    //Thêm phương thức search để xử lý tìm kiếm
-    // public function search() {
-    //     $query = $_GET['query'];
-        
-    //     // Gọi dịch vụ để tìm kiếm tin tức
-    //     $newsService = new NewsService();
-    //     $results = $newsService->searchNews($query);
-        
-    //     // Chuyển kết quả tới view
-    //     include APP_ROOT.'/app/views/news/search_results.php';
-    // }
 
     public function add() {
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $title = $_POST['title'] ?? '';
         $content = $_POST['content'] ?? '';
         $image = $_FILES['image'] ?? null;
+        $category_id = $_POST['category_id'] ?? null;
 
         $imageName = null;
         if ($image && $image['error'] === UPLOAD_ERR_OK) {
@@ -40,18 +30,20 @@ class NewsController {
             }
         }
 
-        // Gọi service để thêm bản tin
         $newsService = new NewsService();
-        $newsService->addNews($title, $content, $imageName);
+        $newsService->addNews($title, $content, $imageName, $category_id);
 
-        // Chuyển hướng về danh sách
         header('Location: ?controller=News&action=index');
         exit();
     }
 
-    // Hiển thị form nếu không phải POST
     include APP_ROOT . '/app/views/admin/news/add.php';
 }
+
+    public function showAdd() 
+    {
+        include APP_ROOT . '/app/views/admin/news/add.php';
+    }
     
     public function edit() {
         $id = isset($_GET['id']) ? intval($_GET['id']) : null;
@@ -77,6 +69,7 @@ class NewsController {
             $title = $_POST['title'];
             $content = $_POST['content'];
             $image = $_FILES['image'];
+            $category_id = $_POST['category_id'];
     
             $newsService = new NewsService();
     
@@ -89,7 +82,7 @@ class NewsController {
                 $imageName = $news->getImage();
             }
     
-            $success = $newsService->updateNews($id, $title, $content, $imageName);
+            $success = $newsService->updateNews($id, $title, $content, $imageName, $category_id);
     
             if ($success) {
                 header("Location: " . DOMAIN . "public/index.php?controller=News&action=index");
