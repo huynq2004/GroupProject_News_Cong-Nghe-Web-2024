@@ -31,4 +31,3 @@
     <a href="?controller=Home&action=index" class="btn btn-primary mt-4">Quay lại</a>
 </div>
 <?php include APP_ROOT . '/app/views/layouts/footer.php'; ?>
-
