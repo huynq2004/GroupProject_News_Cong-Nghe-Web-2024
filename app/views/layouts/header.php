@@ -76,7 +76,7 @@
         <div class="collapse navbar-collapse" id="navbarsExample09">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-around w-100">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">TRANG CHỦ</a>
+              <a class="nav-link active" aria-current="page" href="?controller=Home&action=index">TRANG CHỦ</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -94,7 +94,7 @@
               <button class="btn btn-outline-secondary" type="submit" style="font-size: 15px; padding: 5px 10px 5px 8px; width:150px">TÌM KIẾM</button>
             </form>
             <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">LIÊN HỆ</a>
+              <a class="nav-link active" aria-disabled="false" href="#">LIÊN HỆ</a>
             </li>
           </ul>
         </div>

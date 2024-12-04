@@ -14,7 +14,7 @@
                         <!-- Cột chứa thông tin tin tức -->
                         <div class="col-md-9">
                             <h5>
-                                <a href="/news/detail/<?= $news->getId() ?>">
+                                <a href="?controller=Home&action=detail&id=<?= $news->getId();  ?>">
                                     <?= htmlspecialchars($news->getTitle()) ?>
                                 </a>
                             </h5>
@@ -28,8 +28,7 @@
     <?php else: ?>
         <p>Không tìm thấy kết quả nào.</p>
     <?php endif; ?>
-
-    <a href="<?= DOMAIN ?>public/index.php?controller=News&action=index" class="btn btn-primary mt-4">Quay lại</a>
+    <a href="?controller=Home&action=index" class="btn btn-primary mt-4">Quay lại</a>
 </div>
 <?php include APP_ROOT . '/app/views/layouts/footer.php'; ?>
 
