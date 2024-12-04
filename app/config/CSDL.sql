@@ -25,13 +25,9 @@ CREATE TABLE news (
     image VARCHAR(255),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     category_id INT NOT NULL,
-<<<<<<< HEAD
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
-=======
-    FOREIGN KEY (category_id) REFERENCES categories(id)
->>>>>>> 2008621f6b59d55f89d75954d68782bfb4b03d33
 );
---Them admin
+-- Them admin
 
 INSERT INTO users (username, password, role)
 VALUES ('admin','123123', 1),
