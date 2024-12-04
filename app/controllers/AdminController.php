@@ -22,13 +22,11 @@ class AdminController
                     header("Location: " . DOMAIN . "public/index.php?controller=News&action=index");
                     exit();
                 } else {
-                    $error = "Bạn không có quyền truy cập trang admin!";
-                    session_destroy(); // Xóa session nếu không phải admin
+                    header("Location: " . DOMAIN . "public/index.php?controller=Home&action=index");
+                    exit();
                 }
             } else {
-                // Nếu tài khoản không tồn tại hoặc mật khẩu sai
                 $error = "Tên đăng nhập hoặc mật khẩu không đúng!";
-                // Điều hướng về trang đăng nhập và truyền thông báo lỗi qua URL
                 header("Location: " . DOMAIN . "public/index.php?controller=Admin&action=showLogin&error=" . urlencode($error));
                 exit();
             }
