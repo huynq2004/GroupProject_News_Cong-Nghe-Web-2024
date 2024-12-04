@@ -27,7 +27,7 @@ CREATE TABLE news (
     category_id INT NOT NULL,
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 );
---Them admin
+-- Them admin
 
 INSERT INTO users (username, password, role)
 VALUES ('admin','123123', 1),

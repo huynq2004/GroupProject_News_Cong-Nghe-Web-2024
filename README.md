@@ -11,9 +11,9 @@ Phân công công việc:
 
 Các nhánh sẽ được tổ chức như sau:
 
-feature/setup-database (Thủy): Thiết lập cơ sở dữ liệu và lớp Database.
-feature/frontend-home (Hoàn): Tạo giao diện danh sách tin tức và chi tiết tin tức.
-feature/backend-home (Hoàn): Viết logic xử lý danh sách tin tức và chi tiết tin tức.
-feature/frontend-search (Quỳnh): Chức năng tìm kiếm và giao diện người dùng.
-feature/admin-auth (Thủy): Đăng nhập/đăng xuất cho quản trị viên.
-feature/admin-news-management (Huy): Quản lý tin tức (thêm, sửa, xóa).
+- feature/setup-database (Thủy): Thiết lập cơ sở dữ liệu và lớp Database.
+- feature/frontend-home (Hoàn): Tạo giao diện danh sách tin tức và chi tiết tin tức.
+- feature/backend-home (Hoàn): Viết logic xử lý danh sách tin tức và chi tiết tin tức.
+- feature/frontend-search (Quỳnh): Chức năng tìm kiếm và giao diện người dùng.
+- feature/admin-auth (Thủy): Đăng nhập/đăng xuất cho quản trị viên.
+- feature/admin-news-management (Huy): Quản lý tin tức (thêm, sửa, xóa).
