@@ -1,7 +1,9 @@
 <?php
-require_once APP_ROOT .'/app/models/News.php';
+require_once APP_ROOT . '/app/models/News.php';
+require_once APP_ROOT . '/app/config/database.php';
 
-class NewsService{
+class NewsService
+{
     public function getAllNews()
     {
         $newsList = [];
@@ -22,10 +24,90 @@ class NewsService{
         }
     }
 
-    public function editNews($news){
+    public function getNewsById($id)
+    {
+        $dbConnection = new DBConnection();
+        $conn = $dbConnection->getConnection();
+
+        if ($conn != null) {
+            $sql = "SELECT * FROM news WHERE id = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $row = $stmt->fetch();
+
+            // Kiểm tra xem có dữ liệu không trước khi tạo đối tượng
+            if ($row) {
+                return new News(
+                    $row['id'],
+                    $row['title'],
+                    $row['content'],
+                    $row['image'],
+                    $row['created_at'],
+                    $row['category_id']
+                );
+            } else {
+                // Xử lý trường hợp không tìm thấy bài viết
+                return null;
+            }
+        } else {
+            echo 'Không kết nối được tới cơ sở dữ liệu';
+            return null;
+        }
     }
 
-    public function addNews($news){}
+    public function updateNews($id, $title, $content, $image, $category_id)
+    {
+        $dbConnection = new DBConnection();
+        $conn = $dbConnection->getConnection();
+
+        if ($conn != null) {
+            $sql = "UPDATE news SET title = :title, content = :content, image = :image, category_id = :category_id WHERE id = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':content', $content);
+            $stmt->bindParam(':image', $image);
+            $stmt->bindParam(':category_id', $category_id);
+
+            return $stmt->execute();
+        } else {
+            return false;
+        }
+    }
+
+
+    public function addNews($title, $content, $imageName, $category_id)
+    {
+        $dbConnection = new DBConnection();
+        $conn = $dbConnection->getConnection();
+
+        if ($conn != null) {
+            $sql = "INSERT INTO news (title, content, image, category_id) VALUES (:title, :content, :image, :category_id)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':content', $content);
+            $stmt->bindParam(':image', $imageName);
+            $stmt->bindParam(':category_id', $category_id);
+            $stmt->execute();
+        } else {
+            echo 'Không thể kết nối cơ sở dữ liệu!';
+        }
+    }
+
+    public function delete($id)
+    {
+        $dbConnection = new DBConnection();
+        $conn = $dbConnection->getConnection();
+
+        if ($conn != null) {
+            $sql = "DELETE FROM news WHERE id = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+        } else {
+            echo 'Không thể kết nối cơ sở dữ liệu!';
+        }
+    }
 }
-    
-        

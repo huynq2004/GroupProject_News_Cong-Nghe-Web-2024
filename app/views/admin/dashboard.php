@@ -4,7 +4,7 @@
             <thead class="table-dark">
                 <tr>
                     <th scope="col">
-                        <a href="<?= DOMAIN . '/app/views/admin/news/add.php'; ?>" class="btn btn-success">Thêm bản tin</a>
+                        <a href="?controller=News&action=showAdd" class="btn btn-success">Thêm bản tin</a>
                     </th>
                     <th scope="col"></th>
                     <th scope="col">Sửa</th>
@@ -24,10 +24,10 @@
                             <p><?= $news->getContent() ?></p>
                         </td>
                         <td style="vertical-align: middle;">
-                            <a href="<?= DOMAIN.'app/views/admin/news/edit.php?id='.$news->getId()?>"><i class="bi-pencil-square" style="font-size: 30px;"></i></a>
+                            <a href="?controller=News&action=edit&id=<?= $news->getId();  ?>" title="Sửa"><i class="bi-pencil-square" style="font-size: 30px;"></i></a>
                         </td>
                         <td style="vertical-align: middle;">
-                            <form action="<?= DOMAIN.'app/views/admin/news/delete.php' ?>" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa tin này?')">
+                            <form action="?controller=News&action=delete" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa tin này?')">
                                 <input type="hidden" name="id" value="<?= $news->getId() ?>">
                                 <button type="submit" class="btn btn-link p-0 m-0 text-danger" style="border: none; background: none;">
                                     <i class="bi bi-trash" style="font-size: 30px;"></i>
