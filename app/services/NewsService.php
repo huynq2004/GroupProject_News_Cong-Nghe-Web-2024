@@ -57,18 +57,19 @@ class NewsService
         }
     }
 
-    public function updateNews($id, $title, $content, $image)
+    public function updateNews($id, $title, $content, $image, $category_id)
     {
         $dbConnection = new DBConnection();
         $conn = $dbConnection->getConnection();
 
         if ($conn != null) {
-            $sql = "UPDATE news SET title = :title, content = :content, image = :image WHERE id = :id";
+            $sql = "UPDATE news SET title = :title, content = :content, image = :image, category_id = :category_id WHERE id = :id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':content', $content);
             $stmt->bindParam(':image', $image);
+            $stmt->bindParam(':category_id', $category_id);
 
             return $stmt->execute();
         } else {
@@ -77,17 +78,18 @@ class NewsService
     }
 
 
-    public function addNews($title, $content, $imageName)
+    public function addNews($title, $content, $imageName, $category_id)
     {
         $dbConnection = new DBConnection();
         $conn = $dbConnection->getConnection();
 
         if ($conn != null) {
-            $sql = "INSERT INTO news (title, content, image) VALUES (:title, :content, :image)";
+            $sql = "INSERT INTO news (title, content, image, category_id) VALUES (:title, :content, :image, :category_id)";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':content', $content);
             $stmt->bindParam(':image', $imageName);
+            $stmt->bindParam(':category_id', $category_id);
             $stmt->execute();
         } else {
             echo 'Không thể kết nối cơ sở dữ liệu!';
